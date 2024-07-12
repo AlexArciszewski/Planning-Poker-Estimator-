@@ -1,0 +1,33 @@
+<html>
+    <head>
+
+        <title>  Planning Poker Application | Register  </title>
+
+
+
+
+
+    </head>
+    <div class="container">
+
+        <h3> Create your account here  </h3>
+
+        <h5>      Welcome to Planning Poker App </h5>
+
+        <br>
+        <br>
+
+        <form method="POST" autocomplete="off">
+
+            {%  csrf_token %}
+
+            {{ RegistrationForm.as_p }}
+
+            <br> <br>
+
+            <button type="submit"> &nbsp; Create Account </button>
+
+        </form>
+    </div>
+
+</html>

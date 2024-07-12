@@ -1,0 +1,28 @@
+<htm>
+    <head>
+
+        <title>  Planning Poker App Estimator for your Scrum Team | Login  </title>
+
+    </head>
+    <div class="container">
+
+        <h3> Login to your Profile </h3>
+
+        <br>
+        <br>
+
+        <form method="POST" autocomplete="off">
+
+            {% csrf_token %}
+
+            {{LoginForm.as_p}}
+
+            <br>
+
+            <button type="submit"> Login     </button>
+
+        </form>
+
+    </div>
+
+</htm>
