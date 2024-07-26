@@ -9,7 +9,9 @@ def sprints_inside_page(request):
     return render(request, 'sprints/sprints_inside_page.html')
 
 
+def create_sprint(request):
 
+    pass
 
 
 

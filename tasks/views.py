@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 
+from . forms import TaskForm
+
 def tasks_main_page(request):
 
     return render(request, 'tasks/tasks_main_page.html')
@@ -10,6 +12,9 @@ def tasks_inside_page(request):
 
 
 
+def create_task(request):
+
+    return render(request, 'tasks/create_task.html')
 
 
 

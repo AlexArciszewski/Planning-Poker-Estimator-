@@ -22,4 +22,5 @@ from . import views
 urlpatterns = [
     path('tasks_main_page', views.tasks_main_page, name="tasks_main_page"),
     path('tasks_inside_page', views.tasks_inside_page, name="tasks_inside_page"),
+    path('create_task', views.create_task, name="create_task")
 ]
