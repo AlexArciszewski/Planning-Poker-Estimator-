@@ -14,7 +14,24 @@ def tasks_inside_page(request):
 
 def create_task(request):
 
-    return render(request, 'tasks/create_task.html')
+    form = TaskForm()
+
+    if request.method == 'POST':
+
+        form = TaskForm(request.POST)
+
+        if form.is_valid():
+
+            task = form.save(commit=False)
+
+            task.user = request.user
+
+            task.save()
+
+
+    context = {'CreateTaskForm': form}
+
+    return render(request, 'tasks/create_task.html',context)
 
 
 
