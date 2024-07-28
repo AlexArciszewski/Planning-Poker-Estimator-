@@ -22,7 +22,7 @@ class Task(models.Model):
 
     user = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True)
 
-    sprint_connected = models.ForeignKey(Sprint, max_length=150, on_delete=models.CASCADE, null=True, related_name='tasks')
+    # sprint_connected = models.ForeignKey(Sprint, max_length=150, on_delete=models.CASCADE, null=True, related_name='tasks')
     # tu chyba zrobię ForeignKey(z klasy Task z pliku z modelami z tasks)
 #     importuję klasę.Sprint z pliku models w folderze sprints.... przed Sprint powinnna być nazwa pliku models ale czy
 #     to nie spowoduje szukania w modelsach gdzie jest user? taka konstrukcja chyba robi blad

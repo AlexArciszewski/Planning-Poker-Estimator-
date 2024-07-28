@@ -28,6 +28,7 @@ def create_task(request):
 
             task.save()
 
+            return redirect('dashboard')
 
     context = {'CreateTaskForm': form}
 

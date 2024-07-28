@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 
+from . forms import SprintForm
+
 def sprints_main_page(request):
 
     return render(request, 'sprints/sprints_main_page.html')
@@ -11,7 +13,25 @@ def sprints_inside_page(request):
 
 def create_sprint(request):
 
-    pass
+    form2 = SprintForm()
+
+    if request.method == 'POST':
+
+        form2 = SprintForm(request.POST)
+
+        if form2.is_valid():
+
+            sprint = form2.save(commit=False)
+
+            sprint.user = request.user
+
+            sprint.save()
+
+            return redirect('sprints_main_page')
+
+    context = {'CreateSprintForm': form2}
+
+    return render(request, 'sprints/create_sprint.html', context)
 
 
 

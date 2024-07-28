@@ -22,4 +22,5 @@ from . import views
 urlpatterns = [
     path('sprints_main_page', views.sprints_main_page, name="sprints_main_page"),
     path('sprints_inside_page', views.sprints_inside_page, name="sprints_inside_page"),
+    path('create_sprint', views.create_sprint, name="create_sprint"),
 ]
