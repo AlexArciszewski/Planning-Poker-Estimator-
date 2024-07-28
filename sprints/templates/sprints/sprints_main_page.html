@@ -1,1 +1,30 @@
-<h1>        page with list of sprints and options on the left . navbar will be imported soon</h1>
+{% extends 'users/navbar.html' %}
+
+{% block content %}
+
+<h1> Sprints main page </h1>
+
+
+<a href="{%  url '' %}"> Sprint name </a>
+
+<br>
+
+<br>
+
+<a href="{%  url '' %}"> Sprint description </a>
+
+<br>
+
+<br>
+
+<a href="{%  url '' %}"> Task connected </a>
+
+<br>
+
+<br>
+
+<br>
+
+<a href="{%  url 'create_sprint' %}"> Add Sprint </a>
+
+{% endblock %}

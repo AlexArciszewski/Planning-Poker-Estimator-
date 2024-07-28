@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from . forms import TaskForm
-
+from . models import Task
 def tasks_main_page(request):
 
     return render(request, 'tasks/tasks_main_page.html')
@@ -32,9 +32,17 @@ def create_task(request):
 
     context = {'CreateTaskForm': form}
 
-    return render(request, 'tasks/create_task.html',context)
+    return render(request, 'tasks/create_task.html', context)
+
+def my_tasks(request):
+
+    current_user = request.user.id
+    task = Task.objects.all().filter(user=current_user)
+
+    context = {'AllTasks': task}
 
 
+    return render(request, 'tasks/my_tasks_page.html', context)
 
 # from . forms import CreateUserForm, LoginForm
 #

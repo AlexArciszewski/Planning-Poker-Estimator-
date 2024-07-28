@@ -16,4 +16,5 @@ class SprintForm(ModelForm):
         """metadane dla naszej klasy zdefiniowanie klasy,którą chcemy użyć"""
 
         model = Sprint
-        fields = '__all__'
+        fields = ['sprint_id', 'sprint_title', 'sprint_info', 'po_name', ]
+        exclude = ['user',]

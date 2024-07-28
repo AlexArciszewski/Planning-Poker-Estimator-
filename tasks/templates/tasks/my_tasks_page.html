@@ -1,0 +1,51 @@
+{%  extends 'users/navbar.html'  %}
+
+{%  block content   %}
+
+    <h1>       My tasks </h1>
+
+    <br>
+
+    {%  for task in AllTasks %}
+
+    <div class="container">
+
+        {{task.task_title}}
+
+        <br>
+
+        {{task.task_info}}
+
+        <br>
+
+        {{task.date_posted}}
+
+        <br>
+
+        {{task.po_name}}
+
+        <br>
+
+        {{task.task_owner}}
+
+        <br>
+
+        {{task.user_story}}
+
+        <br>
+
+        {{task.user}}
+
+        <br>
+
+
+    </div>
+
+    {% endfor %}
+
+    <br>
+
+{% endblock %}
+
+
+
