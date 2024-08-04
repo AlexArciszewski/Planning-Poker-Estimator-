@@ -1,0 +1,37 @@
+{%  extends 'users/navbar.html'  %}
+
+{%  block content   %}
+
+    <h1>My Sprints </h1>
+    <br>
+
+    {%  for sprint in list_sprints %}
+
+    <div class="container">
+        {{sprint.title}}
+        <br>
+        {{sprint.description}}
+        <br>
+        {{sprint.product_owner}}
+        <br>
+        {{sprint.created_by}}
+        <br>
+
+        <br>
+    </div>
+    {% endfor %}
+    <br>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ create_sprint_form.as_p }}
+
+        <button type="submit">Create Sprint</button>
+    </form>
+
+{% endblock %}
+
+
+

@@ -2,48 +2,38 @@
 
 {%  block content   %}
 
-    <h1>       My tasks </h1>
-
+    <h1>My tasks </h1>
     <br>
 
-    {%  for task in AllTasks %}
+    {%  for task in list_tasks %}
 
     <div class="container">
-
-        {{task.task_title}}
-
+        {{task.title}}
         <br>
-
-        {{task.task_info}}
-
+        {{task.description}}
         <br>
-
-        {{task.date_posted}}
-
+        {{task.created_at}}
         <br>
-
-        {{task.po_name}}
-
+        {{task.product_owner}}
         <br>
-
-        {{task.task_owner}}
-
-        <br>
-
         {{task.user_story}}
-
         <br>
-
-        {{task.user}}
-
+        {{task.created_by}}
         <br>
-
-
+        {{task.sprint}}
+        <br>
     </div>
-
     {% endfor %}
-
     <br>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ create_task_form.as_p }}
+
+        <button type="submit">Create Task</button>
+    </form>
 
 {% endblock %}
 

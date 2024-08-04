@@ -3,16 +3,15 @@ from django.contrib.auth.models import User
 
 
 class Sprint(models.Model):
+    title = models.CharField(max_length=150, help_text='Title of the sprint')
 
-    sprint_id = models.CharField(max_length=150)
-
-    sprint_title = models.CharField(max_length=150)
-
-    sprint_info = models.CharField(max_length=450)
-
-    date_posted = models.DateField(auto_now_add=True)
-
-    po_name = models.CharField(max_length=150)
+    description = models.TextField(help_text='Description of the sprint')
 
 
-    user = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True)
+    created_at = models.DateField(auto_now_add=True, help_text='Date of creation of the sprint')
+
+    product_owner = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True, help_text='Product owner of the sprint', related_name='owned_sprints')
+
+    # user = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True)
+
+    created_by = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True,help_text='User who created the sprint', related_name='created_sprints')

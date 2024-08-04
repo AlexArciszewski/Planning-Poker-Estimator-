@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from . forms import SprintForm
+from . models import Sprint
 
 def sprints_main_page(request):
 
@@ -32,6 +33,37 @@ def create_sprint(request):
     context = {'CreateSprintForm': form2}
 
     return render(request, 'sprints/create_sprint.html', context)
+
+def my_sprints(request):
+
+    form2 = SprintForm()
+
+    if request.method == 'POST':
+
+        form2 = SprintForm(request.POST)
+
+        if form2.is_valid():
+            sprint = form2.save(commit=False)
+
+            sprint.created_by = request.user
+
+            sprint.save()
+
+            return redirect('dashboard')
+
+    sprints = Sprint.objects.all().filter(created_by=request.user)
+
+    context = {'create_sprint_form': form2, 'list_sprints' : sprints}
+
+    return render(request, 'sprints/my_sprints.html', context)
+
+
+
+    # sprint = Sprint.objects.all().filter(created_by=request.user)
+    #
+    #
+    # return render(request, 'sprints/my_sprints.html')
+
 
 
 

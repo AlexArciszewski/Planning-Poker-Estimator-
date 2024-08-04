@@ -1,28 +1,25 @@
 from django.db import models
 
 from sprints.models import Sprint
-
 from django.contrib.auth.models import User
 
 class Task(models.Model):
+    title = models.CharField(max_length=150, help_text='Title of the task')
 
-    task_id = models.CharField(max_length=150)
+    description = models.TextField(help_text='Description of the task')
 
-    task_title = models.CharField(max_length=150)
+    created_at = models.DateField(auto_now_add=True, help_text='Date of creation of the task')
 
-    task_info = models.CharField(max_length=450)
+    product_owner = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True, help_text='Product owner of the task', related_name='owned_tasks')
 
-    date_posted = models.DateField(auto_now_add=True)
+    user_story = models.CharField(max_length=5, help_text='User story number', null=True, blank=True)
 
-    po_name = models.CharField(max_length=150)
+    created_by = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True, help_text='User who created the task', related_name='created_tasks')
 
-    task_owner = models.CharField(max_length=150)
+    sprint = models.ForeignKey(Sprint, max_length=150, on_delete=models.CASCADE, null=True, related_name='tasks')
 
-    user_story = models.CharField(max_length=5)     #czy jest user story stworzone
 
-    user = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True)
 
-    # sprint_connected = models.ForeignKey(Sprint, max_length=150, on_delete=models.CASCADE, null=True, related_name='tasks')
     # tu chyba zrobię ForeignKey(z klasy Task z pliku z modelami z tasks)
 #     importuję klasę.Sprint z pliku models w folderze sprints.... przed Sprint powinnna być nazwa pliku models ale czy
 #     to nie spowoduje szukania w modelsach gdzie jest user? taka konstrukcja chyba robi blad

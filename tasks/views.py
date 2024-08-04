@@ -11,9 +11,30 @@ def tasks_inside_page(request):
     return render(request, 'tasks/tasks_inside_page.html')
 
 
+#
+# def create_task(request):
+#
+#     form = TaskForm()
+#
+#     if request.method == 'POST':
+#
+#         form = TaskForm(request.POST)
+#
+#         if form.is_valid():
+#
+#             task = form.save(commit=False)
+#
+#             task.user = request.user
+#
+#             task.save()
+#
+#             return redirect('dashboard')
+#
+#     context = {'CreateTaskForm': form}
+#
+#     return render(request, 'tasks/create_task.html', context)
 
-def create_task(request):
-
+def my_tasks(request):
     form = TaskForm()
 
     if request.method == 'POST':
@@ -24,24 +45,14 @@ def create_task(request):
 
             task = form.save(commit=False)
 
-            task.user = request.user
+            task.created_by = request.user
 
             task.save()
 
             return redirect('dashboard')
 
-    context = {'CreateTaskForm': form}
-
-    return render(request, 'tasks/create_task.html', context)
-
-def my_tasks(request):
-
-    current_user = request.user.id
-    task = Task.objects.all().filter(user=current_user)
-
-    context = {'AllTasks': task}
-
-
+    tasks = Task.objects.all().filter(created_by=request.user)
+    context = {'create_task_form': form, 'list_tasks': tasks}
     return render(request, 'tasks/my_tasks_page.html', context)
 
 # from . forms import CreateUserForm, LoginForm
