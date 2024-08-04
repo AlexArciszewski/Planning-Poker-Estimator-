@@ -17,6 +17,13 @@
         {{sprint.created_by}}
         <br>
 
+        <a href="{% url 'sprints_update' sprint.id %}"> Update Sprint</a>
+
+        <br>
+
+        <a href="{% url 'sprints_update' sprint.id %}"> Delete Sprint</a>
+
+        <br>
         <br>
     </div>
     {% endfor %}
@@ -29,6 +36,10 @@
         {{ create_sprint_form.as_p }}
 
         <button type="submit">Create Sprint</button>
+
+        <button type="submit">Update Sprint</button>
+
+        <button type="submit">Delete Sprint</button>
     </form>
 
 {% endblock %}

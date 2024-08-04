@@ -1,0 +1,29 @@
+{% extends 'users/navbar.html' %}
+
+{% block content %}
+
+
+     <div class="container">
+
+        <h3> Update a Sprint</h3>
+
+        <br>
+        <br>
+
+        <form method="POST" autocomplete="off">
+
+            {% csrf_token %}
+
+            {{UpdateSprintForm.as_p}}
+
+            <br>
+
+            <button type="submit"> Update   </button>
+
+        </form>
+
+    </div>
+
+
+
+{% endblock %}

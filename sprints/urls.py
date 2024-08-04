@@ -24,5 +24,6 @@ urlpatterns = [
     path('sprints_inside_page', views.sprints_inside_page, name="sprints_inside_page"),
     path('create_sprint', views.create_sprint, name="create_sprint"),
     path('my_sprints', views.my_sprints, name="my_sprints"),
+    path('sprints_update/<str:pk>', views.sprints_update, name="sprints_update"),
 
 ]

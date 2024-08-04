@@ -59,6 +59,35 @@ def my_sprints(request):
 
 
 
+def sprints_update(request, pk):
+
+    sprints = Sprint.objects.get(id=pk)
+
+    form2 = SprintForm(instance=sprints)
+
+    if request.method == 'POST':
+
+        form2 = SprintForm(request.POST, instance=sprints)
+
+        if form2.is_valid():
+
+            form2.save()
+
+            return redirect('dashboard')
+
+    context = {'UpdateSprintForm': form2}
+
+    return render(request, 'sprints/sprints_update.html', context)
+
+
+
+
+
+
+
+
+
+
     # sprint = Sprint.objects.all().filter(created_by=request.user)
     #
     #
