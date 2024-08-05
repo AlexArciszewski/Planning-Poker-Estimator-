@@ -22,6 +22,10 @@
         <br>
         {{task.sprint}}
         <br>
+
+        <a href="{% url 'tasks_update_page' task.id %}">Update task</a>
+
+
     </div>
     {% endfor %}
     <br>

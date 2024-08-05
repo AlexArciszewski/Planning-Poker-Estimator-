@@ -55,6 +55,29 @@ def my_tasks(request):
     context = {'create_task_form': form, 'list_tasks': tasks}
     return render(request, 'tasks/my_tasks_page.html', context)
 
+
+
+def tasks_update(request,pk):
+
+    task = Task.objects.get(id=pk)
+
+    form = TaskForm(instance=task)
+
+    if request.method == 'POST':
+
+        form = TaskForm(request.POST, instance=task)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect('dashboard')
+
+    context = {'UpdateTaskForm' : form}
+
+    return render(request, 'tasks/tasks_update_page.html', context)
+
+
 # from . forms import CreateUserForm, LoginForm
 #
 # from django.contrib.auth.models import auth
