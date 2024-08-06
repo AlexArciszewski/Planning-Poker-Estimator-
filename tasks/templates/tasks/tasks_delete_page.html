@@ -1,0 +1,31 @@
+{%  extends 'users/navbar.html'  %}
+
+
+{%  block content%}
+
+    <div class="container">
+
+        <h1>       Deleting a task </h1>
+
+        <p>  Are You sure U want to delete that  task </p>
+
+        <form method="POST" autocomplete="off">
+
+            {% csrf_token %}
+
+
+            <br>
+
+            <button type="submit"> Delete task    </button>
+
+        </form>
+
+        <a href="{%  url 'user_logout' %}"> </a>
+
+        <a href="{% url 'my_tasks_page'    %}"> Return to My Tasks</a>
+
+    </div>
+
+
+
+{% endblock %}

@@ -80,7 +80,20 @@ def sprints_update(request, pk):
     return render(request, 'sprints/sprints_update.html', context)
 
 
+def delete_sprints(request, pk):
 
+    sprints = Sprint.objects.get(id=pk)
+
+    # return redirect('dashboard')
+
+    if request.method == 'POST':
+
+        sprints.delete()
+
+        return redirect('my_sprints')
+
+
+    return render(request, 'sprints/sprints_delete.html')
 
 
 

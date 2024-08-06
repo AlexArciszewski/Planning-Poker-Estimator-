@@ -71,11 +71,27 @@ def tasks_update(request,pk):
 
             form.save()
 
+        else:
+
             return redirect('dashboard')
 
     context = {'UpdateTaskForm' : form}
 
     return render(request, 'tasks/tasks_update_page.html', context)
+
+def tasks_delete(request, pk):
+
+    task = Task.objects.get(id=pk)
+
+    if request.method == 'POST':
+
+        task.delete()
+
+        return redirect('my_tasks_page')
+
+    return render(request, 'tasks/tasks_delete_page.html')
+
+
 
 
 # from . forms import CreateUserForm, LoginForm
