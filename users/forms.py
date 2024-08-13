@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # defaultowy formularz do budowania modeli
-
+from . models import Profile
 
 from django.contrib.auth.models import User
 
@@ -26,3 +26,14 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=PasswordInput())
 
     # Textinput do wpisania nazwy usera passwordinput do wpisania hasła z kropkami zamaist liter
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('birth_date', 'location', 'bio')

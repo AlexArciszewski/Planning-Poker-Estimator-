@@ -94,6 +94,14 @@ def tasks_delete(request, pk):
 
 
 
+
+
+
+
+
+
+
+
 # from . forms import CreateUserForm, LoginForm
 #
 # from django.contrib.auth.models import auth

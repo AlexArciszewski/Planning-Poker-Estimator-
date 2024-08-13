@@ -3,6 +3,8 @@ from django.db import models
 from sprints.models import Sprint
 from django.contrib.auth.models import User
 
+
+
 class Task(models.Model):
     title = models.CharField(max_length=150, help_text='Title of the task')
 
@@ -20,6 +22,20 @@ class Task(models.Model):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # tu chyba zrobię ForeignKey(z klasy Task z pliku z modelami z tasks)
 #     importuję klasę.Sprint z pliku models w folderze sprints.... przed Sprint powinnna być nazwa pliku models ale czy
 #     to nie spowoduje szukania w modelsach gdzie jest user? taka konstrukcja chyba robi blad
@@ -27,3 +43,4 @@ class Task(models.Model):
 
 
 # Create your models here.
+
