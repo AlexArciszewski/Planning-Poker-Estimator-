@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 
 from . forms import TaskForm
 from . models import Task
+
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 def tasks_main_page(request):
 
     return render(request, 'tasks/tasks_main_page.html')
@@ -34,26 +37,61 @@ def tasks_inside_page(request):
 #
 #     return render(request, 'tasks/create_task.html', context)
 
+# def my_tasks(request):
+#     form = TaskForm()
+#
+#     if request.method == 'POST':
+#
+#         form = TaskForm(request.POST)
+#
+#         if form.is_valid():
+#
+#             task = form.save(commit=False)
+#
+#             task.created_by = request.user
+#
+#             task.save()
+#
+#             return redirect('dashboard')
+#
+#     tasks = Task.objects.all().filter(created_by=request.user)
+#     context = {'create_task_form': form, 'list_tasks': tasks}
+#     return render(request, 'tasks/my_tasks_page2.html', context)
+
+
+
 def my_tasks(request):
+
     form = TaskForm()
-
     if request.method == 'POST':
-
         form = TaskForm(request.POST)
-
         if form.is_valid():
-
             task = form.save(commit=False)
-
             task.created_by = request.user
-
             task.save()
-
-            return redirect('dashboard')
+            return redirect('my_tasks_page')
 
     tasks = Task.objects.all().filter(created_by=request.user)
-    context = {'create_task_form': form, 'list_tasks': tasks}
+
+    paginator = Paginator(tasks, 3)
+    page_number = request.GET.get('page')
+
+    try:
+
+        tasks_page = paginator.page(page_number)
+    except PageNotAnInteger:
+        tasks_page = paginator.page(1)
+    except EmptyPage:
+        tasks_page = paginator.page(paginator.num_pages)
+
+    context = {
+        'create_task_form': form,
+        'list_tasks': tasks_page
+    }
+
+
     return render(request, 'tasks/my_tasks_page.html', context)
+
 
 
 

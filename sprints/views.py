@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from . forms import SprintForm
 from . models import Sprint
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 def sprints_main_page(request):
 
     return render(request, 'sprints/sprints_main_page.html')
@@ -34,26 +36,60 @@ def create_sprint(request):
 
     return render(request, 'sprints/create_sprint.html', context)
 
+# def my_sprints(request):
+#
+#     form2 = SprintForm()
+#
+#     if request.method == 'POST':
+#
+#         form2 = SprintForm(request.POST)
+#
+#         if form2.is_valid():
+#             sprint = form2.save(commit=False)
+#
+#             sprint.created_by = request.user
+#
+#             sprint.save()
+#
+#             return redirect('dashboard')
+#
+#     sprints = Sprint.objects.all().filter(created_by=request.user)
+#
+#
+#     context = {'create_sprint_form': form2, 'list_sprints' : sprints}
+#
+#     return render(request, 'sprints/my_sprints2.html', context)
 def my_sprints(request):
-
     form2 = SprintForm()
 
     if request.method == 'POST':
-
         form2 = SprintForm(request.POST)
-
         if form2.is_valid():
             sprint = form2.save(commit=False)
-
             sprint.created_by = request.user
-
             sprint.save()
-
             return redirect('dashboard')
 
+    # Pobieramy wszystkie sprinty stworzone przez użytkownika
     sprints = Sprint.objects.all().filter(created_by=request.user)
 
-    context = {'create_sprint_form': form2, 'list_sprints' : sprints}
+    # Ustawiamy paginację na 10 elementów na stronę
+    paginator = Paginator(sprints, 3)  # 10 sprintów na stronę
+    page_number = request.GET.get('page')
+
+    try:
+        sprints_page = paginator.page(page_number)
+    except PageNotAnInteger:
+        # Jeżeli page_number nie jest liczbą całkowitą, wyświetlamy pierwszą stronę
+        sprints_page = paginator.page(1)
+    except EmptyPage:
+        # Jeżeli page_number jest poza zakresem (np. za duża liczba), wyświetlamy ostatnią stronę
+        sprints_page = paginator.page(paginator.num_pages)
+
+    context = {
+        'create_sprint_form': form2,
+        'list_sprints': sprints_page
+    }
 
     return render(request, 'sprints/my_sprints.html', context)
 
@@ -104,7 +140,7 @@ def delete_sprints(request, pk):
     # sprint = Sprint.objects.all().filter(created_by=request.user)
     #
     #
-    # return render(request, 'sprints/my_sprints.html')
+    # return render(request, 'sprints/my_sprints2.html')
 
 
 
