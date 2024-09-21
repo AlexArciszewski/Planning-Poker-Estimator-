@@ -1,0 +1,10 @@
+{% extends 'users/navbar.html'  %}
+
+{% block content %}
+  <h2>Estymacja zadania: {{ task.title }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Zapisz estymację</button>
+  </form>
+{% endblock %}

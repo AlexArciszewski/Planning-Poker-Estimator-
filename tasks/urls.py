@@ -25,5 +25,8 @@ urlpatterns = [
     # path('create_task', views.create_task, name="create_task"),
     path('my_tasks_page', views.my_tasks, name="my_tasks_page"),
     path('tasks_update_page/<str:pk>', views.tasks_update, name="tasks_update_page"),
-    path('tasks_delete_page/<str:pk>', views.tasks_delete, name="tasks_delete_page")
+    path('tasks_delete_page/<str:pk>', views.tasks_delete, name="tasks_delete_page"),
+    path('task_detail_page/<str:pk>', views.task_detail, name="task_detail_page"),
+    path('task/<int:task_id>/estimate/', views.estimate_task, name='estimate_task'),
+
 ]

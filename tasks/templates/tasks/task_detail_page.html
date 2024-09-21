@@ -1,0 +1,29 @@
+{% extends 'users/navbar.html' %}
+
+{% block content %}
+    <h1>{{ task.title }}</h1>
+    <details>
+        <summary>Pokaż szczegóły zadania</summary>
+        <p>Opis: {{ task.description }}</p>
+        <p>Utworzono: {{ task.created_at }}</p>
+        <p>Utworzone przez: {{ task.created_by }}</p>
+        {% if task.user_story %}
+            <p>Historia użytkownika: {{ task.user_story }}</p>
+        {% endif %}
+        {% if task.sprint %}
+            <p>Sprint: {{ task.sprint }}</p>
+        {% endif %}
+    </details>
+
+    {% if form %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+
+    <a href="{% url 'my_tasks_page' %}">Return to the Task list</a>
+    <br>
+    <a href="{% url 'estimate_task' task.pk %}">Task estimation</a>
+{% endblock %}

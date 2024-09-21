@@ -8,7 +8,7 @@
     {%  for task in list_tasks %}
 
     <div class="container">
-        {{task.title}}
+        <a href="{% url 'task_detail_page' task.pk %}" target="_blank">{{ task.title }}</a>
         <br>
         {{task.description}}
         <br>
@@ -57,6 +57,10 @@
 
         <button type="submit">Create Task</button>
     </form>
+
+
+
+
 
 {% endblock %}
 

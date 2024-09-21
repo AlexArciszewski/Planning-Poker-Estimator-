@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class Sprint(models.Model):
     title = models.CharField(max_length=150, help_text='Title of the sprint')
 
@@ -15,3 +16,5 @@ class Sprint(models.Model):
     # user = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True)
 
     created_by = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True,help_text='User who created the sprint', related_name='created_sprints')
+
+    users = models.ManyToManyField(User)
