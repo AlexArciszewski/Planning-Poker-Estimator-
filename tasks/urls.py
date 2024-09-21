@@ -16,17 +16,15 @@ Including another URLconf
 """
 
 from django.urls import path, include
-
 from . import views
 
 urlpatterns = [
     path('tasks_main_page', views.tasks_main_page, name="tasks_main_page"),
     path('tasks_inside_page', views.tasks_inside_page, name="tasks_inside_page"),
-    # path('create_task', views.create_task, name="create_task"),
     path('my_tasks_page', views.my_tasks, name="my_tasks_page"),
     path('tasks_update_page/<str:pk>', views.tasks_update, name="tasks_update_page"),
     path('tasks_delete_page/<str:pk>', views.tasks_delete, name="tasks_delete_page"),
     path('task_detail_page/<str:pk>', views.task_detail, name="task_detail_page"),
-    path('task/<int:task_id>/estimate/', views.estimate_task, name='estimate_task'),
+    path('task/<str:pk>/estimate/', views.estimate_task, name='estimate_task'),
 
 ]
