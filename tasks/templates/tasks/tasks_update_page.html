@@ -1,28 +1,13 @@
 {%  extends 'users/navbar.html'  %}
-
-
 {%  block content%}
-
     <div class="container">
-
-        <h1>       Updating task the task </h1>
-
+        <h1> Updating task the task </h1>
         <form method="POST" autocomplete="off">
-
             {% csrf_token %}
-
             {{UpdateTaskForm.as_p}}
-
             <br>
-
             <button type="submit"> Update task    </button>
-
         </form>
-
         <a href="{%  url 'user_logout' %}"> </a>
-
     </div>
-
-
-
 {% endblock %}

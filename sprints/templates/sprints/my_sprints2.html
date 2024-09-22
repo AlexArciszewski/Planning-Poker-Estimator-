@@ -1,12 +1,8 @@
 {%  extends 'users/navbar.html'  %}
-
 {%  block content   %}
-
     <h1>My Sprints </h1>
     <br>
-
     {%  for sprint in list_sprints %}
-
     <div class="container">
         {{sprint.title}}
         <br>
@@ -16,37 +12,20 @@
         <br>
         {{sprint.created_by}}
         <br>
-
         <a href="{% url 'sprints_update' sprint.id %}"> Update Sprint</a>
-
         <br>
-
         <a href="{% url 'sprints_delete' sprint.id %}"> Delete Sprint</a>
-
-        <br>
-        <br>
+        <br><br>
     </div>
     {% endfor %}
     <br>
-
     <form method="POST">
-
         {% csrf_token %}
-
         {{ create_sprint_form.as_p }}
-
         <button type="submit">Create Sprint</button>
-
         <button type="submit">Update Sprint</button>
-
         <button type="submit">Delete Sprint</button>
     </form>
-
-
-
-
-
-
 {% endblock %}
 
 

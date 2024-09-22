@@ -1,44 +1,32 @@
 {%  extends 'users/navbar.html'  %}
-
 {%  block content  %}
-
     <h1>My Sprints </h1>
     <br>
-
     {%  for sprint in list_sprints %}
-
-    <div class="container">
-        {{sprint.title}}
-        <br>
-        {{sprint.description}}
-        <br>
-        {{sprint.product_owner}}
-        <br>
-        {{sprint.created_by}}
-        <br>
-
-        <a href="{% url 'sprints_update' sprint.id %}"> Update Sprint</a>
-
-        <br>
-
-        <a href="{% url 'sprints_delete' sprint.id %}"> Delete Sprint</a>
-
-        <br>
-        <br>
-    </div>
+        <div class="container">
+            {{sprint.title}}
+            <br>
+            {{sprint.description}}
+            <br>
+            {{sprint.product_owner}}
+            <br>
+            {{sprint.created_by}}
+            <br>
+            <a href="{% url 'sprints_update' sprint.id %}"> Update Sprint</a>
+            <br>
+            <a href="{% url 'sprints_delete' sprint.id %}"> Delete Sprint</a>
+            <br><br>
+        </div>
     {% endfor %}
-
      <div class="pagination">
         <span class="step-links">
             {% if list_sprints.has_previous %}
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ list_sprints.previous_page_number }}">previous</a>
             {% endif %}
-
             <span class="current">
                 Page {{ list_sprints.number }} of {{ list_sprints.paginator.num_pages }}.
             </span>
-
             {% if list_sprints.has_next %}
                 <a href="?page={{ list_sprints.next_page_number }}">next</a>
                 <a href="?page={{ list_sprints.paginator.num_pages }}">last &raquo;</a>
@@ -46,18 +34,11 @@
         </span>
     </div>
 
-
     <form method="POST">
-
         {% csrf_token %}
-
         {{ create_sprint_form.as_p }}
-
         <button type="submit">Create Sprint</button>
-
         <button type="submit">Update Sprint</button>
-
         <button type="submit">Delete Sprint</button>
     </form>
-
 {% endblock %}

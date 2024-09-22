@@ -1,12 +1,8 @@
 {%  extends 'users/navbar.html'  %}
-
 {%  block content   %}
-
     <h1>My tasks </h1>
     <br>
-
     {%  for task in list_tasks %}
-
     <div class="container">
         <a href="{% url 'task_detail_page' task.pk %}" target="_blank">{{ task.title }}</a>
         <br>
@@ -22,11 +18,8 @@
         <br>
         {{task.sprint}}
         <br>
-
         <a href="{% url 'tasks_update_page' task.id %}">Update task</a>
-
         <a href="{% url 'tasks_delete_page' task.id %}">Delete task</a>
-
     </div>
     {% endfor %}
     <div class="pagination">
@@ -35,33 +28,21 @@
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ list_tasks.previous_page_number }}">previous</a>
             {% endif %}
-
             <span class="current">
                 Page {{ list_tasks.number }} of {{ list_tasks.paginator.num_pages }}.
             </span>
-
             {% if list_tasks.has_next %}
                 <a href="?page={{ list_tasks.next_page_number }}">next</a>
                 <a href="?page={{ list_tasks.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
     </div>
-
     <br>
-
     <form method="POST">
-
         {% csrf_token %}
-
         {{ create_task_form.as_p }}
-
         <button type="submit">Create Task</button>
     </form>
-
-
-
-
-
 {% endblock %}
 
 

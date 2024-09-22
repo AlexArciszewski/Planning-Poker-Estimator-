@@ -1,5 +1,4 @@
 {% extends 'users/navbar.html'  %}
-
 {% block content %}
   <h2>Task estimated: {{ task.title }}</h2>
   <form method="post">
@@ -7,10 +6,10 @@
     {{ form.as_p }}
     <button type="submit">Confirm Story points</button>
   </form>
+
   {% if estimation %}
     <h2>Your last estimation: {{ estimation }}</h2>
   {% else %}
     <p>No estimations made yet.</p>
   {% endif %}
-
 {% endblock %}

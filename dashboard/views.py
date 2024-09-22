@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 
 def dashboard_main_page(request):
+    """Apps dashboard main page"""
 
     return render(request, 'dashboard/dashboard_main_page.html')
 
 def dashboard_inside_page(request):
-
+    """Apps dashboard internal page"""
     return render(request, 'dashboard/dashboard_inside_page.html')
 
 
