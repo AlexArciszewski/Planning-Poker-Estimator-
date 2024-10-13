@@ -25,6 +25,8 @@ urlpatterns = [
     path('tasks_update_page/<str:pk>', views.tasks_update, name="tasks_update_page"),
     path('tasks_delete_page/<str:pk>', views.tasks_delete, name="tasks_delete_page"),
     path('task_detail_page/<str:pk>', views.task_detail, name="task_detail_page"),
-    path('task/<str:pk>/estimate/', views.estimate_task, name='estimate_task'),
+    path('task/<str:pk>/estimate/<str:est_id>', views.estimate_task, name='estimate_task'),
+
+    path('estimate-task-create/<int:pk>', views.estimate_task_create, name="estimate-task-create"),
 
 ]

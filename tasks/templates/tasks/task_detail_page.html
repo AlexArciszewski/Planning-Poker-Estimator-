@@ -24,5 +24,12 @@
 
     <a href="{% url 'my_tasks_page' %}">Return to the Task list</a>
     <br>
-    <a href="{% url 'estimate_task' task.pk %}">Task estimation</a>
+
+    {% if task.estimations %}
+         <p>{{ task.estimations.all }}</p>
+{#        <a href="{% url 'estimate_task' task.pk estimation.id %}">Task estimation</a>#}
+    {% else %}
+        <p>No estimation yet.</p>
+    {% endif %}
+    <a href="{% url 'estimate-task-create' task.pk %}">Create New Estimation</a>
 {% endblock %}

@@ -4,6 +4,7 @@
     <br>
     {%  for task in list_tasks %}
     <div class="container">
+        <br>
         <a href="{% url 'task_detail_page' task.pk %}" target="_blank">{{ task.title }}</a>
         <br>
         {{task.description}}
@@ -19,7 +20,9 @@
         {{task.sprint}}
         <br>
         <a href="{% url 'tasks_update_page' task.id %}">Update task</a>
+        <br>
         <a href="{% url 'tasks_delete_page' task.id %}">Delete task</a>
+        <br>
     </div>
     {% endfor %}
     <div class="pagination">

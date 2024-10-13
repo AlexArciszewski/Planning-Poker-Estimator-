@@ -42,7 +42,8 @@ class TaskEstimation(models.Model):
         unique_together = ('task', 'estimated_by')
 
     def __str__(self):
-        # return estimation value from the ESIMATED_CHOICES dict by they key from number position of the scroll bar"
+        # return estimation value from the ESTIMATED_CHOICES dict by they key
+        # from number position of the scroll bar"
         choices_dict = dict(self.ESTIMATION_CHOICES)
         if self.estimation in choices_dict:
             return choices_dict[self.estimation]
@@ -50,9 +51,7 @@ class TaskEstimation(models.Model):
             return self.estimation
 
 
-class TeamMember(models.Model):
-    """team member task alocation"""
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True,)
+
 
 
 
