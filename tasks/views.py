@@ -25,8 +25,9 @@ def my_tasks(request: HttpRequest) -> HttpResponse:
             task.created_by = request.user
             task.save()
             return redirect('my_tasks_page')
-
-    tasks = Task.objects.filter(created_by=request.user) # TODO.
+    sprints_user_is_in = Sprint.objects.filter(users=request.user)
+    tasks = Task.objects.filter(sprint__in=sprints_user_is_in)
+    # tasks = Task.objects.filter(created_by=request.user) # TODO.
     paginator = Paginator(tasks, 3)
     page_number = request.GET.get('page')
 
