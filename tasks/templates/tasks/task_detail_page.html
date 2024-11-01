@@ -25,11 +25,33 @@
     <a href="{% url 'my_tasks_page' %}">Return to the Task list</a>
     <br>
 
+     {% if assigned_users %}
+        <h3>Sprint Users:</h3>
+        <ul>
+     {% for user in assigned_users %}
+         <li>{{ user.username }}</li>  {# lub user.username, jeśli nie masz metody get_full_name #}
+     {% endfor %}
+        </ul>
+    {% else %}
+        <p> No sprint USers.</p>
+    {% endif %}
+
+    <br>
+
     {% if task.estimations %}
          <p>{{ task.estimations.all }}</p>
+        {% for estimation in task.estimations.all %}
+            <li>{{ estimation.estimated_by.get_full_name }}: {{ estimation.get_estimation_display }}</li>
+        {% endfor %}
+
 {#        <a href="{% url 'estimate_task' task.pk estimation.id %}">Task estimation</a>#}
     {% else %}
         <p>No estimation yet.</p>
     {% endif %}
+
+    {% if estimation_ended %}
+        <p>Estimation completed. The average estimation : {{ average_estimation }}</p>
+    {% endif %}
+
     <a href="{% url 'estimate-task-create' task.pk %}">Create New Estimation</a>
 {% endblock %}

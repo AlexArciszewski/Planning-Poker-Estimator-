@@ -12,6 +12,22 @@
             <br>
             {{sprint.created_by}}
             <br>
+            {{ sprint.users.all }}
+           <ul>
+                {% for user in sprint.users.all %}
+                    <li>{{ user.username }}</li> <!-- Wyswietlanie nazwy usera -->
+                {% empty %}
+                    <li>No users assigned</li> <!-- wyswietla jak brak userow -->
+                {% endfor %}
+           </ul>
+            <ul>
+                {% for user in sprint_data.chosen_users %}
+                    <li>{{ user.username }}</li> <!--  jw ale inne okno i pole wyboru -->
+                {% empty %}
+                    <li>No chosen users</li> <!-- jw ale inne okno -->
+                {% endfor %}
+        </ul>
+            <br>
             <a href="{% url 'sprints_update' sprint.id %}"> Update Sprint</a>
             <br>
             <a href="{% url 'sprints_delete' sprint.id %}"> Delete Sprint</a>

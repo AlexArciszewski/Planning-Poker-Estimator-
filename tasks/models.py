@@ -15,6 +15,7 @@ class Task(models.Model):
     created_by = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE, null=True,
                                    help_text='User who created the task', related_name='created_tasks')
     sprint = models.ForeignKey(Sprint, max_length=150, on_delete=models.CASCADE, null=True, related_name='tasks')
+    estimation_ended = models.BooleanField(default=False)
 
 
 class TaskEstimation(models.Model):
@@ -48,7 +49,7 @@ class TaskEstimation(models.Model):
         if self.estimation in choices_dict:
             return choices_dict[self.estimation]
         else:
-            return self.estimation
+            return f'{self.estimation, self.estimated_by.get_full_name()}'
 
 
 

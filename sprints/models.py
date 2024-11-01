@@ -14,3 +14,6 @@ class Sprint(models.Model):
     created_by = models.ForeignKey(User, max_length=150, on_delete=models.CASCADE,
                                    null=True, help_text='User who created the sprint', related_name='created_sprints')
     users = models.ManyToManyField(User)
+    chosen_users = models.ManyToManyField(User, related_name='chosen_sprints', blank=True)
+
+

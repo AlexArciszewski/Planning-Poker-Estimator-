@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect
 from . forms import SprintForm
 from . models import Sprint
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
 
 def sprints_main_page(request):
     """View of the main sprint page"""
 
     return render(request, 'sprints/sprints_main_page.html')
+
 
 def sprints_inside_page(request):
     """View of inside sprint page """
@@ -25,6 +27,7 @@ def create_sprint(request):
             sprint = form2.save(commit=False)
             sprint.user = request.user
             sprint.save()
+            form2.save_m2m()
             return redirect('sprints_main_page')
 
     context = {'CreateSprintForm': form2}
@@ -43,12 +46,16 @@ def my_sprints(request):
             sprint = form2.save(commit=False)
             sprint.created_by = request.user
             sprint.save()
+            form2.save_m2m()
             return redirect('dashboard')
 
-    # Pobieramy wszystkie sprinty stworzone przez użytkownika
-    sprints = Sprint.objects.all().filter(created_by=request.user)
+    sprints = Sprint.objects.filter(Q(created_by=request.user) | Q(users=request.user)
+                                    ).distinct()
+    # sprints = Sprint.objects.filter(created_by=request.user)
+    for sprint in sprints:
+        print(f"Sprint: {sprint.title} has users: {sprint.users.all()}")  # Debug mója wersja wszystkei sprinty usera wyciagnalem i d..a
 
-    # Ustawiamy paginację na 10 elementów na stronę
+
     paginator = Paginator(sprints, 3)  # 10 sprintów na stronę
     page_number = request.GET.get('page')
 
