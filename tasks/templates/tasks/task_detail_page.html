@@ -29,7 +29,7 @@
         <h3>Sprint Users:</h3>
         <ul>
      {% for user in assigned_users %}
-         <li>{{ user.username }}</li>  {# lub user.username, jeśli nie masz metody get_full_name #}
+         <li>{{ user.username }}</li>
      {% endfor %}
         </ul>
     {% else %}
@@ -44,7 +44,6 @@
             <li>{{ estimation.estimated_by.get_full_name }}: {{ estimation.get_estimation_display }}</li>
         {% endfor %}
 
-{#        <a href="{% url 'estimate_task' task.pk estimation.id %}">Task estimation</a>#}
     {% else %}
         <p>No estimation yet.</p>
     {% endif %}

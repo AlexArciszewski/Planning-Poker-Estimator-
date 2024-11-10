@@ -87,6 +87,7 @@ def task_detail(request, pk):
     task = get_object_or_404(Task, id=pk)
     estimations = TaskEstimation.objects.filter(task=task)
     assigned_users = task.sprint.users.all() if task.sprint else []
+    average_estimation = None
 
     # estimation_ended = False
     if task.sprint and len(estimations) == len(assigned_users):
@@ -105,10 +106,11 @@ def task_detail(request, pk):
             task.estimation_ended = True
             task.save()
     context = {
-        'task': task,
+        'task': task,       
         'estimations': estimations,
         'assigned_users': assigned_users,
-        'estimation_ended': task.estimation_ended
+        'estimation_ended': task.estimation_ended,
+        'average_estimation': average_estimation
     }
     return render(request, 'tasks/task_detail_page.html', context)
 
